@@ -1,9 +1,15 @@
 import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 import type { ReactNode } from 'react';
 import type { Pokemon } from '../types/pokemon.types';
+import { useQuery } from '@tanstack/react-query';
+import { fetchPokemon } from '../api/pokemons';
 
 interface PokemonContextType {
     pokemon: Pokemon[];
+    isLoading: boolean;
+    isError: boolean;
+    error: Error | null;
+    refetch: () => void;
     addPokemon: (pokemonData: Omit<Pokemon, 'id' | 'favourite' | 'caught'>) => void;
     removePokemon: (id: string) => void;
     toggleCaught: (id: string) => void;
@@ -17,58 +23,46 @@ interface PokemonProviderProps {
     children: ReactNode;
 }
 
-const initialPokemon: Pokemon[] = [
-    {
-        id: '1',
-        name: 'Pikachu',
-        type: 'Electric',
-        rarity: 'Common',
-        level: 25,
-        favourite: true,
-        caught: true,
-    },
-    {
-        id: '2',
-        name: 'Charmander',
-        type: 'Fire',
-        rarity: 'Rare',
-        level: 18,
-        favourite: false,
-        caught: false,
-    },
-    {
-        id: '3',
-        name: 'Bulbasaur',
-        type: 'Grass',
-        rarity: 'Common',
-        level: 12,
-        favourite: false,
-        caught: true,
-    },
-];
 
 export function PokemonProvider({ children }: PokemonProviderProps) {
-    const [pokemon, setPokemon] = useState<Pokemon[]>(initialPokemon);
+    const {
+        data: serverPokemon = [],
+        isLoading,
+        isError,
+        error,
+        refetch,
+    } = useQuery({
+        queryKey: ["pokemon"],
+        queryFn: fetchPokemon,
+    });
+
+    const [clientPokemon, setClientPokemon] = useState<Pokemon[]>([]);
+
+    useEffect(() => {
+        if (serverPokemon.length > 0 && clientPokemon.length === 0) {
+            setClientPokemon(serverPokemon);
+        }
+    }, [serverPokemon, clientPokemon.length]);
 
     const addPokemon = (
         pokemonData: Omit<Pokemon, 'id' | 'favourite' | 'caught'>
     ) => {
         const newPokemon: Pokemon = {
-            id: Date.now().toString(),
+            id: crypto.randomUUID(),
             ...pokemonData,
             favourite: false,
             caught: false,
         };
 
-        setPokemon((prev) => [...prev, newPokemon]);
+        setClientPokemon((prev) => [...prev, newPokemon]);
     };
 
     const removePokemon = (id: string) => {
-        setPokemon((prev) => prev.filter((pokemon) => pokemon.id !== id));
+        setClientPokemon((prev) => prev.filter((pokemon) => pokemon.id !== id));
     };
 
     const toggleCaught = (id: string) => {
-        setPokemon((prev) =>
+        setClientPokemon((prev) =>
             prev.map((pokemon) =>
                 pokemon.id === id
                     ? { ...pokemon, caught: !pokemon.caught }
@@ -78,7 +72,7 @@ export function PokemonProvider({ children }: PokemonProviderProps) {
     };
 
     const toggleFavourite = (id: string) => {
-        setPokemon((prev) =>
+        setClientPokemon((prev) =>
             prev.map((pokemon) =>
                 pokemon.id === id
                     ? { ...pokemon, favourite: !pokemon.favourite }
@@ -88,7 +82,7 @@ export function PokemonProvider({ children }: PokemonProviderProps) {
     };
 
     const markAllAsCaught = () => {
-        setPokemon((prev) =>
+        setClientPokemon((prev) =>
             prev.map((pokemon) => ({
                 ...pokemon,
                 caught: true,
@@ -97,22 +91,27 @@ export function PokemonProvider({ children }: PokemonProviderProps) {
     };
 
     useEffect(() => {
-        const caughtCount = pokemon.filter((singlePokemon) => singlePokemon.caught).length;
-        const totalCount = pokemon.length;
+        const caughtCount = clientPokemon.filter((singlePokemon) => singlePokemon.caught).length;
+        const totalCount = clientPokemon.length;
 
         document.title = `Pokédex (${caughtCount} / ${totalCount} caught)`;
-    }, [pokemon]);
+    }, [clientPokemon]);
+
 
     const value = useMemo(
         () => ({
-            pokemon,
+            pokemon: clientPokemon,
+            isLoading,
+            isError,
+            error,
+            refetch,
             addPokemon,
             removePokemon,
             toggleCaught,
             toggleFavourite,
             markAllAsCaught,
         }),
-        [pokemon]
+        [clientPokemon, isLoading, isError, error, refetch ],
     );
 
     return (

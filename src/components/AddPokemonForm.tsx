@@ -1,13 +1,16 @@
 import { useState } from 'react';
 import { usePokemon } from '../context/PokemonContext';
+import {useNavigate} from "react-router-dom";
 
 export function AddPokemonForm() {
     const { addPokemon } = usePokemon();
+    const navigate = useNavigate();
 
     const [name, setName] = useState('');
     const [type, setType] = useState('');
     const [rarity, setRarity] = useState('');
     const [level, setLevel] = useState('');
+
 
     const handleSubmit: React.SubmitEventHandler<HTMLFormElement> = (event) =>  {
         event.preventDefault();
@@ -23,6 +26,8 @@ export function AddPokemonForm() {
         setType('');
         setRarity('');
         setLevel('');
+
+        navigate('/');
     };
 
     return (

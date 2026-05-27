@@ -1,0 +1,47 @@
+[
+  {
+    "id": "1",
+    "name": "Pikachu",
+    "type": "Electric",
+    "rarity": "Common",
+    "level": 25,
+    "favourite": true,
+    "caught": true
+  },
+  {
+    "id": "2",
+    "name": "Charmander",
+    "type": "Fire",
+    "rarity": "Rare",
+    "level": 18,
+    "favourite": false,
+    "caught": false
+  },
+  {
+    "id": "3",
+    "name": "Bulbasaur",
+    "type": "Grass",
+    "rarity": "Common",
+    "level": 12,
+    "favourite": false,
+    "caught": true
+  },
+  {
+    "id": "4",
+    "name": "Squirtle",
+    "type": "Water",
+    "rarity": "Common",
+    "level": 14,
+    "favourite": false,
+    "caught": false
+  },
+  {
+    "id": "5",
+    "name": "Mewtwo",
+    "type": "Psychic",
+    "rarity": "Legendary",
+    "level": 70,
+    "favourite": false,
+    "caught": false
+  }
+]
