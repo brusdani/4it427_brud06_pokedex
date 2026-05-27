@@ -9,7 +9,7 @@ export function AddPokemonForm() {
     const [rarity, setRarity] = useState('');
     const [level, setLevel] = useState('');
 
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit: React.SubmitEventHandler<HTMLFormElement> = (event) =>  {
         event.preventDefault();
 
         addPokemon({

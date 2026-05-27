@@ -1,37 +1,32 @@
-import { PokemonCard } from './components/PokemonCard';
-import {usePokemon} from "./context/PokemonContext.tsx";
-import {AddPokemonForm} from "./components/AddPokemonForm.tsx";
+import { Navigate, NavLink, Route, Routes } from 'react-router-dom';
+
+import { PokedexPage } from './pages/PokedexPage.tsx';
+import { AddPokemonPage } from './pages/AddPokemonPage';
 
 
 function App() {
-    const {
-        pokemon,
-        toggleCaught,
-        toggleFavourite,
-        removePokemon,
-        markAllAsCaught,
-    } = usePokemon();
 
     return (
-        <main>
-            <h1>Pokédex</h1>
-            <button type="button" onClick={markAllAsCaught}>
-                Mark all pokemon as caught
-            </button>
-            <AddPokemonForm>
+        <div>
+            <header>
+                <h1>Pokédex</h1>
 
-            </AddPokemonForm>
+                <nav>
+                    <NavLink to="/">
+                        My Pokédex
+                    </NavLink>
+                    <NavLink to="/form">
+                        Add Pokémon
+                    </NavLink>
+                </nav>
+            </header>
 
-            {pokemon.map((pokemon) => (
-                <PokemonCard
-                    key={pokemon.id}
-                    {...pokemon}
-                    onToggleCaught={toggleCaught}
-                    onToggleFavourite={toggleFavourite}
-                    onRemove={removePokemon}
-                />
-            ))}
-        </main>
+            <Routes>
+                <Route path="/" element={<PokedexPage />} />
+                <Route path="/form" element={<AddPokemonPage />} />
+                <Route path="*" element={<Navigate to="/" replace />} />
+            </Routes>
+        </div>
     );
 }
 
