@@ -2,7 +2,7 @@ import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 import type { ReactNode } from 'react';
 import type { Pokemon } from '../types/pokemon.types';
 import { useQuery } from '@tanstack/react-query';
-import { fetchPokemon } from '../api/pokemons';
+import { fetchPokemon } from '../api/pokemons.ts';
 
 interface PokemonContextType {
     pokemon: Pokemon[];
