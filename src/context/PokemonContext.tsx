@@ -4,7 +4,7 @@ import type { Pokemon } from '../types/pokemon.types';
 
 interface PokemonContextType {
     pokemon: Pokemon[];
-    addPokemon: (pokemonData: Omit<Pokemon, 'id' | 'favorite' | 'caught'>) => void;
+    addPokemon: (pokemonData: Omit<Pokemon, 'id' | 'favourite' | 'caught'>) => void;
     removePokemon: (id: string) => void;
     toggleCaught: (id: string) => void;
     toggleFavourite: (id: string) => void;
@@ -51,7 +51,7 @@ export function PokemonProvider({ children }: PokemonProviderProps) {
     const [pokemon, setPokemon] = useState<Pokemon[]>(initialPokemon);
 
     const addPokemon = (
-        pokemonData: Omit<Pokemon, 'id' | 'favorite' | 'caught'>
+        pokemonData: Omit<Pokemon, 'id' | 'favourite' | 'caught'>
     ) => {
         const newPokemon: Pokemon = {
             id: Date.now().toString(),
@@ -81,7 +81,7 @@ export function PokemonProvider({ children }: PokemonProviderProps) {
         setPokemon((prev) =>
             prev.map((pokemon) =>
                 pokemon.id === id
-                    ? { ...pokemon, favorite: !pokemon.favourite }
+                    ? { ...pokemon, favourite: !pokemon.favourite }
                     : pokemon
             )
         );

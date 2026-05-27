@@ -7,7 +7,7 @@ interface PokemonCardProps {
     favourite: boolean;
     caught: boolean;
     onToggleCaught: (id: string) => void;
-    onToggleFavorite: (id: string) => void;
+    onToggleFavourite: (id: string) => void;
     onRemove: (id: string) => void;
 }
 
@@ -20,7 +20,7 @@ export function PokemonCard({
                                 favourite,
                                 caught,
                                 onToggleCaught,
-                                onToggleFavorite,
+                                onToggleFavourite,
                                 onRemove,
                             }: PokemonCardProps) {
     const isLevelValid = level >= 1 && level <= 100;
@@ -45,7 +45,7 @@ export function PokemonCard({
                     Change caught state
                 </button>
 
-                <button type="button" onClick={() => onToggleFavorite(id)}>
+                <button type="button" onClick={() => onToggleFavourite(id)}>
                     {favourite ? 'Remove from favourites' : 'Add to favourites'}
                 </button>
 
