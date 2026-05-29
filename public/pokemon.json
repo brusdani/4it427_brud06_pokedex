@@ -7,7 +7,8 @@
     "level": 25,
     "favourite": true,
     "caught": true,
-    "imageUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png"
+    "imageUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png",
+    "pokeApiId": 25
   },
   {
     "id": "2",
@@ -17,7 +18,8 @@
     "level": 18,
     "favourite": false,
     "caught": false,
-    "imageUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png"
+    "imageUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png",
+    "pokeApiId": 4
   },
   {
     "id": "3",
@@ -27,7 +29,8 @@
     "level": 12,
     "favourite": false,
     "caught": true,
-    "imageUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png"
+    "imageUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",
+    "pokeApiId": 1
   },
   {
     "id": "4",
@@ -37,7 +40,8 @@
     "level": 14,
     "favourite": false,
     "caught": false,
-    "imageUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/7.png"
+    "imageUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/7.png",
+    "pokeApiId": 7
   },
   {
     "id": "5",
@@ -47,6 +51,7 @@
     "level": 70,
     "favourite": false,
     "caught": false,
-    "imageUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/150.png"
+    "imageUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/150.png",
+    "pokeApiId": 150
   }
 ]

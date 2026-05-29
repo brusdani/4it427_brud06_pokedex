@@ -1,0 +1,268 @@
+.detailCard {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 2rem;
+    border-radius: 1.25rem;
+    background: white;
+    box-shadow: 0 8px 24px rgba(23, 32, 51, 0.08);
+}
+
+.detailHeader {
+    display: grid;
+    grid-template-columns: 360px 1fr;
+    gap: 2rem;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.imagePanel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 340px;
+    border-radius: 1rem;
+    background: #f1f5f9;
+}
+
+.detailImage {
+    width: 300px;
+    height: 300px;
+    object-fit: contain;
+}
+
+.detailTitle {
+    margin: 0 0 1rem;
+    font-size: 3rem;
+    text-transform: capitalize;
+}
+
+.infoGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-top: 1.5rem;
+    padding: 1.25rem;
+    border-radius: 1rem;
+    background: #4aa8d8;
+}
+
+.infoItem {
+    margin: 0;
+}
+
+.infoLabel {
+    display: block;
+    margin-bottom: 0.25rem;
+    color: white;
+    font-weight: 700;
+}
+
+.infoValue {
+    font-size: 1.2rem;
+    color: #0f172a;
+}
+
+.detailSection {
+    margin-top: 1.5rem;
+}
+
+.sectionTitle {
+    margin: 0 0 0.75rem;
+    font-size: 1.4rem;
+}
+
+.pillList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.pill {
+    min-width: 120px;
+    padding: 0.55rem 1rem;
+    border-radius: 0.5rem;
+    text-align: center;
+    font-weight: 700;
+    color: #172033;
+    background: #e8eef8;
+}
+
+.typePill {
+    background: #a7d957;
+}
+
+.abilityPill {
+    background: #fef3c7;
+}
+
+.statsList {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 0.75rem;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.statItem {
+    padding: 0.75rem;
+    border-radius: 0.75rem;
+    background: #f1f5f9;
+}
+
+.statName {
+    display: block;
+    margin-bottom: 0.25rem;
+    font-weight: 700;
+    text-transform: capitalize;
+}
+
+.statValue {
+    font-size: 1.1rem;
+}
+
+@media (max-width: 800px) {
+    .detailHeader {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .imagePanel {
+        min-height: 260px;
+    }
+
+    .detailImage {
+        width: 230px;
+        height: 230px;
+    }
+
+    .detailTitle {
+        font-size: 2.25rem;
+    }
+
+    .infoGrid {
+        grid-template-columns: 1fr;
+        text-align: left;
+    }
+
+    .pillList {
+        justify-content: center;
+    }
+}
+.detailSection {
+    margin-top: 1.5rem;
+    text-align: center;
+}
+
+.sectionTitle {
+    margin: 0 0 0.75rem;
+    font-size: 1.4rem;
+}
+
+.pillList {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.pill {
+    min-width: 120px;
+    padding: 0.55rem 1rem;
+    border-radius: 0.5rem;
+    text-align: center;
+    font-weight: 700;
+    text-transform: capitalize;
+    color: white;
+}
+
+.abilityPill {
+    color: #172033;
+    background: #fef3c7;
+}
+
+.defaultType {
+    background: #64748b;
+}
+
+.normalType {
+    background: #a8a77a;
+}
+
+.fireType {
+    background: #ee8130;
+}
+
+.waterType {
+    background: #6390f0;
+}
+
+.electricType {
+    color: #172033;
+    background: #f7d02c;
+}
+
+.grassType {
+    background: #7ac74c;
+}
+
+.iceType {
+    color: #172033;
+    background: #96d9d6;
+}
+
+.fightingType {
+    background: #c22e28;
+}
+
+.poisonType {
+    background: #a33ea1;
+}
+
+.groundType {
+    color: #172033;
+    background: #e2bf65;
+}
+
+.flyingType {
+    background: #a98ff3;
+}
+
+.psychicType {
+    background: #f95587;
+}
+
+.bugType {
+    background: #a6b91a;
+}
+
+.rockType {
+    background: #b6a136;
+}
+
+.ghostType {
+    background: #735797;
+}
+
+.dragonType {
+    background: #6f35fc;
+}
+
+.darkType {
+    background: #705746;
+}
+
+.steelType {
+    color: #172033;
+    background: #b7b7ce;
+}
+
+.fairyType {
+    background: #d685ad;
+}

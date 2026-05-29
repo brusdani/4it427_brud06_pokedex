@@ -5,6 +5,7 @@ import styles from './App.module.css';
 import { PokedexPage } from './pages/PokedexPage';
 import { AddPokemonPage } from './pages/AddPokemonPage';
 import { FavouritesPage } from './pages/FavouritePage';
+import { PokemonDetailPage } from './pages/PokemonDetailPage';
 
 function App() {
     return (
@@ -52,6 +53,7 @@ function App() {
                 <Route path="/" element={<PokedexPage />} />
                 <Route path="/form" element={<AddPokemonPage />} />
                 <Route path="/favourites" element={<FavouritesPage />} />
+                <Route path="/pokemon/:pokeApiId" element={<PokemonDetailPage />} />
                 <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
         </div>

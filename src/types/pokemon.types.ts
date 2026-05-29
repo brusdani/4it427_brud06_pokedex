@@ -7,4 +7,5 @@ export type Pokemon = {
     favourite: boolean;
     caught: boolean;
     imageUrl?: string;
+    pokeApiId?: number;
 };

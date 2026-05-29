@@ -1,4 +1,5 @@
 import styles from './PokemonCard.module.css';
+import { Link } from 'react-router-dom';
 
 interface PokemonCardProps {
     id: string;
@@ -9,6 +10,7 @@ interface PokemonCardProps {
     favourite: boolean;
     caught: boolean;
     imageUrl?: string;
+    pokeApiId?: number;
     onToggleCaught: (id: string) => void;
     onToggleFavourite: (id: string) => void;
     onRemove: (id: string) => void;
@@ -23,6 +25,7 @@ export function PokemonCard({
                                 favourite,
                                 caught,
                                 imageUrl,
+                                pokeApiId,
                                 onToggleCaught,
                                 onToggleFavourite,
                                 onRemove,
@@ -65,6 +68,17 @@ export function PokemonCard({
             <div className={styles.badges}>
                 {caught && <p className={styles.caughtBadge}>✓ Caught</p>}
                 {favourite && <p className={styles.favouriteBadge}>★ Favourite</p>}
+            </div>
+
+            <div className={styles.actions}>
+                {pokeApiId && (
+                    <Link
+                        to={`/pokemon/${pokeApiId}`}
+                        className={styles.detailLink}
+                    >
+                        View detail
+                    </Link>
+                )}
             </div>
 
             <div className={styles.actions}>
