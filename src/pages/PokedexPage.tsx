@@ -1,5 +1,6 @@
 import { PokemonCard } from '../components/PokemonCard';
 import { usePokemon } from '../context/PokemonContext';
+import styles from '../App.module.css';
 
 export function PokedexPage() {
     const {
@@ -16,18 +17,23 @@ export function PokedexPage() {
 
     if (isLoading) {
         return (
-            <main>
-                <p>Loading pokémon...</p>
+            <main className={styles.page}>
+                <p className={styles.loadingBox}>Loading Pokémon...</p>
             </main>
         );
     }
+
     if (isError) {
         return (
-            <main>
-                <section>
-                    <h1>Failed to load pokémon</h1>
+            <main className={styles.page}>
+                <section className={styles.errorBox}>
+                    <h1>Failed to load Pokémon</h1>
                     <p>{error?.message}</p>
-                    <button onClick={() => refetch()}>
+                    <button
+                        type="button"
+                        className={styles.primaryButton}
+                        onClick={() => refetch()}
+                    >
                         Try again
                     </button>
                 </section>
@@ -39,22 +45,28 @@ export function PokedexPage() {
     const totalCount = pokemon.length;
 
     return (
-        <>
-            <div>
-                <p>
+        <main className={styles.page}>
+            <section className={styles.pageHeader}>
+                <p className={styles.counter}>
                     {caughtCount} / {totalCount} caught
                 </p>
 
-                <button type="button" onClick={markAllAsCaught}>
+                <button
+                    type="button"
+                    className={styles.primaryButton}
+                    onClick={markAllAsCaught}
+                >
                     Mark all as caught
                 </button>
-            </div>
+            </section>
 
-            <main>
-                {pokemon.length === 0 ? (
-                    <p>No Pokémon in your Pokédex yet.</p>
-                ) : (
-                    pokemon.map((pokemon) => (
+            {pokemon.length === 0 ? (
+                <p className={styles.emptyState}>
+                    No Pokémon in your Pokédex yet.
+                </p>
+            ) : (
+                <section className={styles.grid}>
+                    {pokemon.map((pokemon) => (
                         <PokemonCard
                             key={pokemon.id}
                             {...pokemon}
@@ -62,9 +74,9 @@ export function PokedexPage() {
                             onToggleFavourite={toggleFavourite}
                             onRemove={removePokemon}
                         />
-                    ))
-                )}
-            </main>
-        </>
+                    ))}
+                </section>
+            )}
+        </main>
     );
 }

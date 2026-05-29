@@ -1,5 +1,6 @@
 import { PokemonCard } from '../components/PokemonCard';
 import { usePokemon } from '../context/PokemonContext';
+import styles from '../App.module.css';
 
 export function FavouritesPage() {
     const {
@@ -15,19 +16,23 @@ export function FavouritesPage() {
 
     if (isLoading) {
         return (
-            <main>
-                <p>Loading favourite Pokémon...</p>
+            <main className={styles.page}>
+                <p className={styles.loadingBox}>Loading favourite Pokémon...</p>
             </main>
         );
     }
 
     if (isError) {
         return (
-            <main>
-                <section>
+            <main className={styles.page}>
+                <section className={styles.errorBox}>
                     <h1>Failed to load Pokémon</h1>
                     <p>{error?.message}</p>
-                    <button type="button" onClick={() => refetch()}>
+                    <button
+                        type="button"
+                        className={styles.primaryButton}
+                        onClick={() => refetch()}
+                    >
                         Try again
                     </button>
                 </section>
@@ -40,21 +45,29 @@ export function FavouritesPage() {
     );
 
     return (
-        <main>
-            <h1>Favourite Pokémon</h1>
+        <main className={styles.page}>
+            <section className={styles.pageHeader}>
+                <p className={styles.counter}>
+                    {favouritePokemon.length} favourite Pokémon
+                </p>
+            </section>
 
             {favouritePokemon.length === 0 ? (
-                <p>You do not have any favourite Pokémon yet.</p>
+                <p className={styles.emptyState}>
+                    You do not have any favourite Pokémon yet.
+                </p>
             ) : (
-                favouritePokemon.map((singlePokemon) => (
-                    <PokemonCard
-                        key={singlePokemon.id}
-                        {...singlePokemon}
-                        onToggleCaught={toggleCaught}
-                        onToggleFavourite={toggleFavourite}
-                        onRemove={removePokemon}
-                    />
-                ))
+                <section className={styles.grid}>
+                    {favouritePokemon.map((singlePokemon) => (
+                        <PokemonCard
+                            key={singlePokemon.id}
+                            {...singlePokemon}
+                            onToggleCaught={toggleCaught}
+                            onToggleFavourite={toggleFavourite}
+                            onRemove={removePokemon}
+                        />
+                    ))}
+                </section>
             )}
         </main>
     );

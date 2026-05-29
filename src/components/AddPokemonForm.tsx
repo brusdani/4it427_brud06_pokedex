@@ -1,6 +1,8 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import { usePokemon } from '../context/PokemonContext';
-import {useNavigate} from "react-router-dom";
+import styles from './AddPokemonForm.module.css';
 
 export function AddPokemonForm() {
     const { addPokemon } = usePokemon();
@@ -11,8 +13,7 @@ export function AddPokemonForm() {
     const [rarity, setRarity] = useState('');
     const [level, setLevel] = useState('');
 
-
-    const handleSubmit: React.SubmitEventHandler<HTMLFormElement> = (event) =>  {
+    const handleSubmit: React.SubmitEventHandler<HTMLFormElement> = (event) => {
         event.preventDefault();
 
         addPokemon({
@@ -31,39 +32,47 @@ export function AddPokemonForm() {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <h2>Add Pokémon</h2>
-            <div>
-                <label>
-                    <span>Name</span>
+        <form onSubmit={handleSubmit} className={styles.form}>
+            <h2 className={styles.title}>Add Pokémon</h2>
+
+            <div className={styles.fields}>
+                <label className={styles.field}>
+                    <span className={styles.label}>Name</span>
                     <input
+                        className={styles.input}
                         type="text"
                         value={name}
                         onChange={(event) => setName(event.target.value)}
                         required
                     />
                 </label>
-                <label>
-                    <span>Type</span>
+
+                <label className={styles.field}>
+                    <span className={styles.label}>Type</span>
                     <input
+                        className={styles.input}
                         type="text"
                         value={type}
                         onChange={(event) => setType(event.target.value)}
                         required
                     />
                 </label>
-                <label>
-                    <span>Rarity</span>
+
+                <label className={styles.field}>
+                    <span className={styles.label}>Rarity</span>
                     <input
+                        className={styles.input}
                         type="text"
                         value={rarity}
                         onChange={(event) => setRarity(event.target.value)}
                         required
                     />
                 </label>
-                <label>
-                    <span>Level</span>
+
+                <label className={styles.field}>
+                    <span className={styles.label}>Level</span>
                     <input
+                        className={styles.input}
                         type="number"
                         value={level}
                         onChange={(event) => setLevel(event.target.value)}
@@ -73,7 +82,8 @@ export function AddPokemonForm() {
                     />
                 </label>
             </div>
-            <button type="submit">
+
+            <button type="submit" className={styles.submitButton}>
                 Add Pokémon
             </button>
         </form>

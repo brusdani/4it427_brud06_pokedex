@@ -1,25 +1,48 @@
+/* Styling method: CSS Modules */
 import { Navigate, NavLink, Route, Routes } from 'react-router-dom';
 
-import { PokedexPage } from './pages/PokedexPage.tsx';
+import styles from './App.module.css';
+import { PokedexPage } from './pages/PokedexPage';
 import { AddPokemonPage } from './pages/AddPokemonPage';
-import {FavouritesPage} from "./pages/FavouritePage.tsx";
-
+import { FavouritesPage } from './pages/FavouritePage';
 
 function App() {
-
     return (
-        <div>
-            <header>
-                <h1>Pokédex</h1>
+        <div className={styles.app}>
+            <header className={styles.header}>
+                <h1 className={styles.title}>Pokédex</h1>
 
-                <nav>
-                    <NavLink to="/">
+                <nav className={styles.nav}>
+                    <NavLink
+                        to="/"
+                        className={({ isActive }) =>
+                            isActive
+                                ? `${styles.navLink} ${styles.active}`
+                                : styles.navLink
+                        }
+                    >
                         My Pokédex
                     </NavLink>
-                    <NavLink to="/form">
+
+                    <NavLink
+                        to="/form"
+                        className={({ isActive }) =>
+                            isActive
+                                ? `${styles.navLink} ${styles.active}`
+                                : styles.navLink
+                        }
+                    >
                         Add Pokémon
                     </NavLink>
-                    <NavLink to="/favourites">
+
+                    <NavLink
+                        to="/favourites"
+                        className={({ isActive }) =>
+                            isActive
+                                ? `${styles.navLink} ${styles.active}`
+                                : styles.navLink
+                        }
+                    >
                         Favourites
                     </NavLink>
                 </nav>
