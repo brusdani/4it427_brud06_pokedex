@@ -6,4 +6,5 @@ export type Pokemon = {
     level: number;
     favourite: boolean;
     caught: boolean;
+    imageUrl?: string;
 };

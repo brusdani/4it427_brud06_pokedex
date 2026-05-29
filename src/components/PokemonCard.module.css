@@ -92,3 +92,29 @@
 .dangerButton:hover {
     background: #b91c1c;
 }
+.imageWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 120px;
+    margin-bottom: 0.25rem;
+}
+
+.image {
+    width: 120px;
+    height: 120px;
+    object-fit: contain;
+}
+
+.imageFallback {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    font-size: 3rem;
+    font-weight: 700;
+    color: #64748b;
+    background: #e8eef8;
+}

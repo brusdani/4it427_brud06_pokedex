@@ -8,6 +8,7 @@ interface PokemonCardProps {
     level: number;
     favourite: boolean;
     caught: boolean;
+    imageUrl?: string;
     onToggleCaught: (id: string) => void;
     onToggleFavourite: (id: string) => void;
     onRemove: (id: string) => void;
@@ -21,6 +22,7 @@ export function PokemonCard({
                                 level,
                                 favourite,
                                 caught,
+                                imageUrl,
                                 onToggleCaught,
                                 onToggleFavourite,
                                 onRemove,
@@ -29,6 +31,18 @@ export function PokemonCard({
 
     return (
         <article className={`${styles.card} ${caught ? styles.caughtCard : ''}`}>
+            <div className={styles.imageWrapper}>
+                {imageUrl ? (
+                    <img
+                        className={styles.image}
+                        src={imageUrl}
+                        alt={name}
+                    />
+                ) : (
+                    <div className={styles.imageFallback}>?</div>
+                )}
+            </div>
+
             <h2 className={styles.title}>{name}</h2>
 
             <p className={styles.info}>

@@ -6,7 +6,8 @@
     "rarity": "Common",
     "level": 25,
     "favourite": true,
-    "caught": true
+    "caught": true,
+    "imageUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png"
   },
   {
     "id": "2",
@@ -15,7 +16,8 @@
     "rarity": "Rare",
     "level": 18,
     "favourite": false,
-    "caught": false
+    "caught": false,
+    "imageUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png"
   },
   {
     "id": "3",
@@ -24,7 +26,8 @@
     "rarity": "Common",
     "level": 12,
     "favourite": false,
-    "caught": true
+    "caught": true,
+    "imageUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png"
   },
   {
     "id": "4",
@@ -33,7 +36,8 @@
     "rarity": "Common",
     "level": 14,
     "favourite": false,
-    "caught": false
+    "caught": false,
+    "imageUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/7.png"
   },
   {
     "id": "5",
@@ -42,6 +46,7 @@
     "rarity": "Legendary",
     "level": 70,
     "favourite": false,
-    "caught": false
+    "caught": false,
+    "imageUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/150.png"
   }
 ]
