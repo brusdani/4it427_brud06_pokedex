@@ -1,5 +1,7 @@
 import { PokemonCard } from '../components/PokemonCard';
 import { usePokemon } from '../context/PokemonContext';
+import { useState } from 'react';
+import { filterPokemonByName } from "../utils/pokemonUtils.ts";
 import styles from '../App.module.css';
 
 export function PokedexPage() {
@@ -14,6 +16,8 @@ export function PokedexPage() {
         markAllAsCaught,
         removePokemon,
     } = usePokemon();
+
+    const [searchTerm, setSearchTerm] = useState('');
 
     if (isLoading) {
         return (
@@ -43,9 +47,22 @@ export function PokedexPage() {
 
     const caughtCount = pokemon.filter((pokemon) => pokemon.caught).length;
     const totalCount = pokemon.length;
+    const filteredPokemon = filterPokemonByName(pokemon, searchTerm);
 
     return (
         <main className={styles.page}>
+            <section className={styles.searchBox}>
+                <label className={styles.searchLabel}>
+                    Search Pokémon
+                    <input
+                        className={styles.searchInput}
+                        type="search"
+                        value={searchTerm}
+                        onChange={(event) => setSearchTerm(event.target.value)}
+                        placeholder="Search by name..."
+                    />
+                </label>
+            </section>
             <section className={styles.pageHeader}>
                 <p className={styles.counter}>
                     {caughtCount} / {totalCount} caught
@@ -60,13 +77,13 @@ export function PokedexPage() {
                 </button>
             </section>
 
-            {pokemon.length === 0 ? (
+            {filteredPokemon.length === 0 ? (
                 <p className={styles.emptyState}>
-                    No Pokémon in your Pokédex yet.
+                    No Pokémon match your search.
                 </p>
             ) : (
                 <section className={styles.grid}>
-                    {pokemon.map((pokemon) => (
+                    {filteredPokemon.map((pokemon) => (
                         <PokemonCard
                             key={pokemon.id}
                             {...pokemon}

@@ -107,6 +107,39 @@
 .errorBox {
     border-left: 5px solid #dc2626;
 }
+.searchBox {
+    margin-bottom: 1.5rem;
+    padding: 1.25rem;
+    border-radius: 1rem;
+    background: white;
+    box-shadow: 0 8px 24px rgba(23, 32, 51, 0.06);
+}
+
+.searchBox {
+    max-width: 700px;
+    margin: 0 auto 1.5rem;
+    padding: 1.25rem;
+    border-radius: 1rem;
+    background: white;
+    box-shadow: 0 8px 24px rgba(23, 32, 51, 0.06);
+}
+
+.searchLabel {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    font-weight: 700;
+    text-align: center;
+}
+
+.searchInput {
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #cbd5e1;
+    border-radius: 999px;
+    padding: 0.75rem 1rem;
+    font: inherit;
+}
 
 @media (max-width: 700px) {
     .app {
