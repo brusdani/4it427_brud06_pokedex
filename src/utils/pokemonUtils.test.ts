@@ -5,6 +5,7 @@ import {
     countCaughtPokemon,
     countFavouritePokemon,
     isPokemonLevelValid,
+    filterPokemonByName
 } from './pokemonUtils';
 
 const pokemon: Pokemon[] = [
@@ -76,5 +77,64 @@ describe('countFavouritePokemon', () => {
         const result = countFavouritePokemon([]);
 
         expect(result).toBe(0);
+    });
+});
+describe('filterPokemonByName', () => {
+    it('returns Pokémon whose name contains the searched text', () => {
+        const result = filterPokemonByName(pokemon, 'char');
+
+        expect(result).toHaveLength(1);
+        expect(result[0].name).toBe('Charmander');
+    });
+
+    it('ignores letter case and spaces at the beginning or end', () => {
+        const result = filterPokemonByName(pokemon, '  PIKA  ');
+
+        expect(result).toHaveLength(1);
+        expect(result[0].name).toBe('Pikachu');
+    });
+
+    it('returns all Pokémon when the search term is empty', () => {
+        const result = filterPokemonByName(pokemon, '');
+
+        expect(result).toEqual(pokemon);
+    });
+
+    it('can return multiple matching Pokémon', () => {
+        const pokemonWithSimilarNames = [
+            ...pokemon,
+            {
+                id: '4',
+                name: 'Regirock',
+                type: 'Rock',
+                rarity: 'Legendary',
+                level: 50,
+                favourite: false,
+                caught: false,
+            },
+            {
+                id: '5',
+                name: 'Regice',
+                type: 'Ice',
+                rarity: 'Legendary',
+                level: 50,
+                favourite: false,
+                caught: false,
+            },
+        ];
+
+        const result = filterPokemonByName(pokemonWithSimilarNames, 'regi');
+
+        expect(result).toHaveLength(2);
+        expect(result.map((singlePokemon) => singlePokemon.name)).toEqual([
+            'Regirock',
+            'Regice',
+        ]);
+    });
+
+    it('returns an empty array when no Pokémon match the search term', () => {
+        const result = filterPokemonByName(pokemon, 'mew');
+
+        expect(result).toEqual([]);
     });
 });
