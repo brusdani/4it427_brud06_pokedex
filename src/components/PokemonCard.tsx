@@ -1,5 +1,6 @@
 import styles from './PokemonCard.module.css';
 import { Link } from 'react-router-dom';
+import { isPokemonLevelValid } from '../utils/pokemonUtils';
 
 interface PokemonCardProps {
     id: string;
@@ -30,7 +31,7 @@ export function PokemonCard({
                                 onToggleFavourite,
                                 onRemove,
                             }: PokemonCardProps) {
-    const isLevelValid = level >= 1 && level <= 100;
+    const isLevelValid = isPokemonLevelValid(level)
 
     return (
         <article className={`${styles.card} ${caught ? styles.caughtCard : ''}`}>
@@ -61,7 +62,7 @@ export function PokemonCard({
                 {isLevelValid ? (
                     level
                 ) : (
-                    <span className={styles.invalidLevel}>Neplatný level</span>
+                    <span className={styles.invalidLevel}>Invalid level</span>
                 )}
             </p>
 
@@ -76,7 +77,7 @@ export function PokemonCard({
                         to={`/pokemon/${pokeApiId}`}
                         className={styles.detailLink}
                     >
-                        View detail
+                        🔍 View detail
                     </Link>
                 )}
             </div>

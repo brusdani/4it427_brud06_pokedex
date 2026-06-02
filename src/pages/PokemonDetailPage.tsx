@@ -5,6 +5,7 @@ import { usePokemonDetail } from '../hooks/usePokemonDetail';
 import styles from '../App.module.css';
 
 export function PokemonDetailPage() {
+
     const { pokeApiId } = useParams();
 
     const {

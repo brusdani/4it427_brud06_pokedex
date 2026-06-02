@@ -38,11 +38,14 @@ export function PokemonProvider({ children }: PokemonProviderProps) {
 
     const [clientPokemon, setClientPokemon] = useState<Pokemon[]>([]);
 
+
+    //Copy "JSON" pokemon data into client state, only done when we don't have client data
     useEffect(() => {
         if (serverPokemon.length > 0 && clientPokemon.length === 0) {
             setClientPokemon(serverPokemon);
         }
-    }, [serverPokemon, clientPokemon.length]);
+    },  //Only run effect when following changes
+        [serverPokemon, clientPokemon.length]);
 
     const addPokemon = (
         pokemonData: Omit<Pokemon, 'id' | 'favourite' | 'caught'>
@@ -89,7 +92,7 @@ export function PokemonProvider({ children }: PokemonProviderProps) {
             }))
         );
     };
-
+    //Updating caught count when clientPokemon array changes and update title
     useEffect(() => {
         const caughtCount = clientPokemon.filter((singlePokemon) => singlePokemon.caught).length;
         const totalCount = clientPokemon.length;
@@ -97,7 +100,7 @@ export function PokemonProvider({ children }: PokemonProviderProps) {
         document.title = `Pokédex (${caughtCount} / ${totalCount} caught)`;
     }, [clientPokemon]);
 
-
+    //to prevent creating new value objects upon render, only renders when following changes
     const value = useMemo(
         () => ({
             pokemon: clientPokemon,

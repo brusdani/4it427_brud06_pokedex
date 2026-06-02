@@ -1,5 +1,5 @@
 import type { PokemonDetail } from '../types/pokemonDetail.types';
-
+//Type returned from API
 type PokeApiPokemonResponse = {
     id: number;
     name: string;
@@ -35,6 +35,7 @@ type PokeApiPokemonResponse = {
 export async function fetchPokemonDetail(
     idOrName: string
 ): Promise<PokemonDetail> {
+    await new Promise((resolve) => setTimeout(resolve, 1500));
     const response = await fetch(
         `https://pokeapi.co/api/v2/pokemon/${idOrName.toLowerCase()}`
     );
@@ -44,7 +45,7 @@ export async function fetchPokemonDetail(
     }
 
     const data = (await response.json()) as PokeApiPokemonResponse;
-
+    //Mapping to pokemonDetail type
     return {
         id: data.id,
         name: data.name,

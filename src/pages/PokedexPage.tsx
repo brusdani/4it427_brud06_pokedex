@@ -17,6 +17,7 @@ export function PokedexPage() {
         removePokemon,
     } = usePokemon();
 
+    //Value of search field changes based on user's typing
     const [searchTerm, setSearchTerm] = useState('');
 
     if (isLoading) {
