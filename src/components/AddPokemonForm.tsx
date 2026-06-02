@@ -1,38 +1,63 @@
-import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 import { usePokemon } from '../context/PokemonContext';
 import styles from './AddPokemonForm.module.css';
+import {
+    addPokemonSchema,
+    type AddPokemonFormData,
+    type AddPokemonFormInput,
+    pokeApiSpriteUrlPrefix,
+    pokemonRarities,
+    pokemonTypes,
+} from '../schemas/addPokemonSchema';
+
 
 export function AddPokemonForm() {
     const { addPokemon } = usePokemon();
     const navigate = useNavigate();
 
-    const [name, setName] = useState('');
-    const [type, setType] = useState('');
-    const [rarity, setRarity] = useState('');
-    const [level, setLevel] = useState('');
+    //input and data are different - level: number
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+        reset,
+    } = useForm<AddPokemonFormInput, unknown, AddPokemonFormData>({
+        resolver: zodResolver(addPokemonSchema),
+        defaultValues: {
+            name: '',
+            type: '',
+            rarity: '',
+            level: 1,
+            imageFileName: '',
+        },
+    });
 
-    const handleSubmit: React.SubmitEventHandler<HTMLFormElement> = (event) => {
-        event.preventDefault();
+    const onSubmit = (data: AddPokemonFormData) => {
+        const imageFileName = data.imageFileName.trim();
 
         addPokemon({
-            name,
-            type,
-            rarity,
-            level: Number(level),
+            name: data.name,
+            type: data.type,
+            rarity: data.rarity,
+            level: data.level,
+            imageUrl: imageFileName
+                ? `${pokeApiSpriteUrlPrefix}${imageFileName}`
+                : undefined,
         });
 
-        setName('');
-        setType('');
-        setRarity('');
-        setLevel('');
-
+        reset();
         navigate('/');
     };
 
     return (
-        <form onSubmit={handleSubmit} className={styles.form}>
+        <form
+            onSubmit={handleSubmit(onSubmit)}
+            className={styles.form}
+            noValidate
+        >
             <h2 className={styles.title}>Add Pokémon</h2>
 
             <div className={styles.fields}>
@@ -41,32 +66,47 @@ export function AddPokemonForm() {
                     <input
                         className={styles.input}
                         type="text"
-                        value={name}
-                        onChange={(event) => setName(event.target.value)}
-                        required
+                        {...register('name')}
                     />
+                    {errors.name && (
+                        <span className={styles.errorMessage}>
+                            {errors.name.message}
+                        </span>
+                    )}
                 </label>
 
                 <label className={styles.field}>
                     <span className={styles.label}>Type</span>
-                    <input
-                        className={styles.input}
-                        type="text"
-                        value={type}
-                        onChange={(event) => setType(event.target.value)}
-                        required
-                    />
+                    <select className={styles.input} {...register('type')}>
+                        <option value="">Select type</option>
+                        {pokemonTypes.map((pokemonType) => (
+                            <option key={pokemonType} value={pokemonType}>
+                                {pokemonType}
+                            </option>
+                        ))}
+                    </select>
+                    {errors.type && (
+                        <span className={styles.errorMessage}>
+                            {errors.type.message}
+                        </span>
+                    )}
                 </label>
 
                 <label className={styles.field}>
                     <span className={styles.label}>Rarity</span>
-                    <input
-                        className={styles.input}
-                        type="text"
-                        value={rarity}
-                        onChange={(event) => setRarity(event.target.value)}
-                        required
-                    />
+                    <select className={styles.input} {...register('rarity')}>
+                        <option value="">Select rarity</option>
+                        {pokemonRarities.map((pokemonRarity) => (
+                            <option key={pokemonRarity} value={pokemonRarity}>
+                                {pokemonRarity}
+                            </option>
+                        ))}
+                    </select>
+                    {errors.rarity && (
+                        <span className={styles.errorMessage}>
+                            {errors.rarity.message}
+                        </span>
+                    )}
                 </label>
 
                 <label className={styles.field}>
@@ -74,12 +114,30 @@ export function AddPokemonForm() {
                     <input
                         className={styles.input}
                         type="number"
-                        value={level}
-                        onChange={(event) => setLevel(event.target.value)}
-                        min="1"
-                        max="100"
-                        required
+                        {...register('level')}
                     />
+                    {errors.level && (
+                        <span className={styles.errorMessage}>
+                            {errors.level.message}
+                        </span>
+                    )}
+                </label>
+
+                <label className={styles.field}>
+                    <span className={styles.label}>
+                        PokéAPI sprite file: (optional)
+                    </span>
+                    <input
+                        className={styles.input}
+                        type="text"
+                        placeholder="Example: 25.png"
+                        {...register('imageFileName')}
+                    />
+                    {errors.imageFileName && (
+                        <span className={styles.errorMessage}>
+                            {errors.imageFileName.message}
+                        </span>
+                    )}
                 </label>
             </div>
 

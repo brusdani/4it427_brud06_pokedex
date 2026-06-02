@@ -71,7 +71,7 @@ export function PokemonCard({
                 {favourite && <p className={styles.favouriteBadge}>★ Favourite</p>}
             </div>
 
-            <div className={styles.actions}>
+            <div className={styles.detailArea}>
                 {pokeApiId && (
                     <Link
                         to={`/pokemon/${pokeApiId}`}

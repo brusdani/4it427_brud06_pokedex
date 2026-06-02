@@ -59,3 +59,9 @@
 .submitButton:hover {
     background: #284bb0;
 }
+
+.errorMessage {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #dc2626;
+}
