@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it, vi } from 'vitest';
+import { MemoryRouter } from 'react-router-dom';
 
 import { PokemonCard } from './PokemonCard';
 
@@ -113,4 +114,24 @@ describe('PokemonCard', () => {
         expect(onRemove).toHaveBeenCalledTimes(1);
         expect(onRemove).toHaveBeenCalledWith('1');
     });
+});
+it('shows detail link when Pokémon has pokeApiId', () => {
+    render(
+        <MemoryRouter>
+            <PokemonCard {...defaultProps} pokeApiId={25} />
+        </MemoryRouter>
+    );
+
+    const detailLink = screen.getByRole('link', { name: /view detail/i });
+
+    expect(detailLink).toBeInTheDocument();
+    expect(detailLink).toHaveAttribute('href', '/pokemon/25');
+});
+
+it('does not show detail link when Pokémon does not have pokeApiId', () => {
+    render(<PokemonCard {...defaultProps} />);
+
+    expect(
+        screen.queryByRole('link', { name: /view detail/i })
+    ).not.toBeInTheDocument();
 });
